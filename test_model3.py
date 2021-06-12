@@ -7,7 +7,7 @@ import pickle
 max_words = 5000
 max_len = 200
 
-best_model3 = tf.keras.models.load_model("best_model3.hdf5")
+best_model3 = tf.keras.models.load_model("Model/best_model3.hdf5")
 sentiment3 = ['Hate Speech','Offensive','Neither']
 
 with open('tockenizer3.pickle','rb') as handle:

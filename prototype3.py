@@ -107,10 +107,10 @@ model = Sequential([
     layers.Dense(3,activation="softmax"),
 ])
 model.compile(optimizer="rmsprop",loss="categorical_crossentropy",metrics=["accuracy"])
-checkpoint = ModelCheckpoint("best_model3.hdf5",monitor="val_accuracy",verbose=1,save_best_only=True,mode='auto',period=1,save_weights_only=False)
+checkpoint = ModelCheckpoint("Model/best_model3.hdf5",monitor="val_accuracy",verbose=1,save_best_only=True,mode='auto',period=1,save_weights_only=False)
 history = model.fit(x_train, y_train, epochs=4, validation_data=(x_test,y_test), verbose=2, callbacks=[checkpoint])
 
-# Test the model on dataset X_test
-best_model = tf.keras.models.load_model("best_model3.hdf5")
+# Test the model on X_test
+best_model = tf.keras.models.load_model("Model/best_model3.hdf5")
 test_loss, test_acc = best_model.evaluate(x_test,y_test,verbose=2)
 print("Test accuracy: {:.2f}%".format(100*test_acc))
