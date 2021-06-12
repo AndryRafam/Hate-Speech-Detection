@@ -7,4 +7,4 @@ In this little project, the model is a Bidirectional LSTM. The project is deploy
 
 ## WARNING !!!
 
-### Due to the nature of the study, it’s important to note that this dataset contains text that can be considered racist, sexist, homophobic, or generally offensive. This is for educational purpose only.
+### Due to the nature of the study, it’s important to note that the dataset contains text that can be considered racist, sexist, homophobic, or generally offensive. This is for educational purpose only.
