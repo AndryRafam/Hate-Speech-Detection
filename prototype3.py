@@ -17,7 +17,7 @@ from gensim.utils import simple_preprocess
 from sklearn.model_selection import train_test_split
 print('Done')
 
-train = pd.read_csv("data.csv")
+train = pd.read_csv("Data/data.csv")
 print(train.head(15))
 print(len(train))
 print(train.groupby('class').nunique())
@@ -102,18 +102,15 @@ print(len(x_train),len(x_test),len(y_train),len(y_test))
 ## BiDR LST LAYER MODEL
 model = Sequential([
     layers.Embedding(max_words,128,input_length=max_len),
-    #layers.Bidirectional(layers.LSTM(64,return_sequences=True)),
-    layers.Bidirectional(layers.LSTM(64,dropout=0.4)),
+    layers.Bidirectional(layers.LSTM(64,return_sequences=True)),
+    layers.Bidirectional(layers.LSTM(64)),
     layers.Dense(3,activation="softmax"),
 ])
-model.compile(optimizer="adam",loss="categorical_crossentropy",metrics=["accuracy"])
+model.compile(optimizer="rmsprop",loss="categorical_crossentropy",metrics=["accuracy"])
 checkpoint = ModelCheckpoint("best_model3.hdf5",monitor="val_accuracy",verbose=1,save_best_only=True,mode='auto',period=1,save_weights_only=False)
-history = model.fit(x_train, y_train, epochs=40, validation_data=(x_test,y_test), verbose=2, callbacks=[checkpoint])
+history = model.fit(x_train, y_train, epochs=4, validation_data=(x_test,y_test), verbose=2, callbacks=[checkpoint])
 
 # Test the model on dataset X_test
 best_model = tf.keras.models.load_model("best_model3.hdf5")
 test_loss, test_acc = best_model.evaluate(x_test,y_test,verbose=2)
-print("Model accuracy: {:.2f}%".format(100*test_acc))
-predictions = best_model.predict(x_test)
-score = predictions[0]
-print("Score: {:.2f} %".format(100*np.max(score)))
+print("Test accuracy: {:.2f}%".format(100*test_acc))
