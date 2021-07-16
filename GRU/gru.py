@@ -72,7 +72,7 @@ labels = df["class"]
 x_train,x_test,y_train,y_test = train_test_split(tweets,labels,random_state=42)
 x_train,x_val,y_train,y_val = train_test_split(x_train,y_train,test_size=0.25,random_state=42)
 
-inputs = tf.keras.Input(shape=max_len,dtype="int32")
+inputs = tf.keras.Input(shape=(None,),dtype="int32")
 x = layers.Embedding(max_words,128)(inputs)
 x = layers.GRU(64,return_sequences=True)(x)
 x = layers.GRU(64)(x)
